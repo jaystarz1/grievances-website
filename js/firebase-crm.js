@@ -1,15 +1,14 @@
 // Firebase CRM Integration for Grievances Website
 // Save this as: /js/firebase-crm.js
 
-// Firebase configuration - REPLACE WITH YOUR CONFIG
+// Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
+    apiKey: "AIzaSyC5igEYEBv3aiXvDxjrOu0khrW8WHnU6sM",
+    authDomain: "grievances-crm.firebaseapp.com",
+    projectId: "grievances-crm",
+    storageBucket: "grievances-crm.firebasestorage.app",
+    messagingSenderId: "743994935319",
+    appId: "1:743994935319:web:b73ba1dafcb2e604e27452"
 };
 
 // Initialize Firebase (using CDN version for simplicity)

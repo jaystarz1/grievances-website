@@ -243,7 +243,7 @@
                             </div>
                             
                             <div class="error-message" id="errorMessage" style="display: none; margin-top: var(--spacing-lg); padding: var(--spacing-lg); background: var(--error); color: white; border-radius: var(--radius-md);">
-                                <p style="margin: 0;">There was an error submitting your request. Please try again or email directly at jay@grievances.thechatbotgenius.com</p>
+                                <p style="margin: 0;">There was an error submitting your request. Please try again or email directly at jay@barkerhrs.com</p>
                             </div>
                         </form>
                     </div>
@@ -337,16 +337,16 @@
 
     <!-- Firebase Configuration and CRM Script -->
     <script>
-        // Your Firebase configuration
+        // Firebase configuration - API key is restricted to this domain
         const firebaseConfig = {
-            apiKey: "AIzaSyC5igEYEBv3aiXvDxjrOu0khrWBWHnU6sM",
+            apiKey: "AIzaSyC5igEYEBv3aiXvDxjrOu0khrW8WHnU6sM",
             authDomain: "grievances-crm.firebaseapp.com",
             projectId: "grievances-crm",
             storageBucket: "grievances-crm.firebasestorage.app",
             messagingSenderId: "743994935319",
             appId: "1:743994935319:web:b73ba1dafcb2e604e27452"
         };
-
+        
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();

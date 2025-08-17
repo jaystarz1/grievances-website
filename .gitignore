@@ -25,6 +25,10 @@ build/
 .env
 .env.local
 .env.production
+firebase-config.js
+*-config.js
+firebase-config.json
+.env.*
 
 # Temporary Files
 *.tmp
