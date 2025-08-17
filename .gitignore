@@ -1,0 +1,39 @@
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependencies
+node_modules/
+bower_components/
+
+# Build Files
+dist/
+build/
+*.log
+
+# Environment Files
+.env
+.env.local
+.env.production
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+
+# Analytics
+google*.html
+
+# Local Development
+*.local
+.netlify/

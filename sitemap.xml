@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/</loc>
+        <lastmod>2024-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Primary Content Pages -->
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/caf-grievance-process.html</loc>
+        <lastmod>2024-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/how-to-file-grievance-caf.html</loc>
+        <lastmod>2024-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/procedural-fairness-military.html</loc>
+        <lastmod>2024-12-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/administrative-investigations-dnd.html</loc>
+        <lastmod>2025-01-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/grievance-writing-guide.html</loc>
+        <lastmod>2025-01-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/frequently-asked-questions.html</loc>
+        <lastmod>2024-12-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/about-book.html</loc>
+        <lastmod>2024-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/resources.html</loc>
+        <lastmod>2024-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://grievances.thechatbotgenius.com/pages/contact.html</loc>
+        <lastmod>2024-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- External Tool -->
+    <url>
+        <loc>https://canliisearch.thechatbotgenius.com/</loc>
+        <lastmod>2025-01-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>
