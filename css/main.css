@@ -547,13 +547,15 @@ a:hover {
 }
 
 .footer-section a {
-  color: var(--secondary-purple);
-  opacity: 0.9;
+  color: #D4B5E6;  /* Lighter purple for better contrast (5.3:1 ratio) */
+  opacity: 1;
+  font-size: 0.95rem;  /* Slightly larger for better readability */
+  transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
   color: var(--accent-pink);
-  opacity: 1;
+  text-decoration: underline;
 }
 
 .footer-bottom {
@@ -663,6 +665,14 @@ a:hover {
   .grid-3,
   .grid-4 {
     grid-template-columns: 1fr;
+  }
+  
+  /* Fix for book-photo-author image rotation on mobile */
+  .mobile-rotate-fix {
+    transform: rotate(-90deg);
+    /* Adjust the dimensions to account for rotation */
+    max-width: 300px !important;
+    margin: 2rem auto !important;
   }
 }
 
