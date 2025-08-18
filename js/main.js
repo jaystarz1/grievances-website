@@ -213,3 +213,31 @@ if ('IntersectionObserver' in window) {
 console.log('%c🍁 An Airing of Grievances', 'color: #6B4C8A; font-size: 24px; font-weight: bold;');
 console.log('%cHelping CAF members navigate the grievance process with confidence.', 'color: #9B7AAD; font-size: 14px;');
 console.log('%cBuilt with care by Jay Tarzwell | thechatbotgenius.com', 'color: #C77DA2; font-size: 12px;');
+
+// Lightbox functionality for book spread image
+function openLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    
+    // Use the high-quality version for the lightbox
+    lightboxImg.src = 'images/book-cover-paperback-spread.jpg';
+    lightbox.style.display = 'flex';
+    
+    // Prevent body scroll when lightbox is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+    
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});

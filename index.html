@@ -393,16 +393,27 @@
                 <div class="text-center">
                     <h3>See the Complete Package</h3>
                     <p>Front and back cover design for the paperback edition:</p>
-                    <picture>
-                        <source srcset="images/book-cover-paperback-spread.webp" type="image/webp">
-                        <img src="images/book-cover-paperback-spread-opt.jpg" 
-                             alt="An Airing of Grievances complete book cover spread showing front and back covers with purple mountain design" 
-                             loading="lazy"
-                             width="800"
-                             height="533"
-                             style="width: 100%; max-width: 800px; margin: 1rem auto; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
-                    </picture>
+                    <div class="lightbox-trigger" style="cursor: pointer; position: relative;" onclick="openLightbox()">
+                        <picture>
+                            <source srcset="images/book-cover-paperback-spread.webp" type="image/webp">
+                            <img src="images/book-cover-paperback-spread-opt.jpg" 
+                                 alt="An Airing of Grievances complete book cover spread showing front and back covers with purple mountain design" 
+                                 loading="lazy"
+                                 width="2205"
+                                 height="1600"
+                                 style="width: 100%; max-width: 600px; height: auto; margin: 1rem auto; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
+                        </picture>
+                        <p style="margin-top: 0.5rem; color: var(--primary-purple); font-weight: 500;">
+                            <span style="text-decoration: underline;">Click to view larger</span> 🔍
+                        </p>
+                    </div>
                 </div>
+            </div>
+            
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="lightbox" onclick="closeLightbox()" style="display: none;">
+                <span class="lightbox-close">&times;</span>
+                <img class="lightbox-content" id="lightbox-img" src="" alt="Full size book spread">
             </div>
         </div>
     </section>
