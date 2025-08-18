@@ -526,7 +526,7 @@ a:hover {
 /* Responsive adjustment for medium screens */
 @media (max-width: 1024px) and (min-width: 769px) {
   .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
