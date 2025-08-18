@@ -206,6 +206,96 @@ a:hover {
   overflow: hidden;
 }
 
+/* Hero Enhancements */
+.badge-new {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.hero h1 .subtitle-small {
+  display: block;
+  font-size: 0.5em;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  opacity: 0.95;
+  line-height: 1.3;
+}
+
+.author-credentials {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.author-credentials span {
+  white-space: nowrap;
+  padding: 0.2rem 0;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+  opacity: 0.98;
+}
+
+.hero-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 2rem 0;
+  font-size: 1rem;
+}
+
+.hero-benefits li {
+  padding: 0.5rem 0;
+  padding-left: 1.8rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.hero-benefits li:before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+}
+
+.trust-text {
+  margin-top: 1.5rem;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.book-showcase {
+  position: relative;
+  display: inline-block;
+}
+
+.book-badge {
+  position: absolute;
+  top: 20px;
+  right: -10px;
+  background: var(--accent-pink);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transform: rotate(5deg);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
 .hero::before {
   content: '';
   position: absolute;
@@ -689,6 +779,26 @@ a:hover {
   .hero-content {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+  
+  .author-credentials {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .hero-benefits {
+    font-size: 0.95rem;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .book-badge {
+    top: 10px;
+    right: 10px;
+    transform: rotate(0);
   }
   
   .nav-menu {
