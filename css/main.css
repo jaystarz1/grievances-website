@@ -317,31 +317,35 @@ a:hover {
   z-index: 1;
 }
 
-/* Desktop: merge text sections into left column, book on right */
-.hero-text-continued {
-  grid-column: 1;
+/* Show/hide book images based on screen size */
+.hero-book-mobile {
+  display: none;
 }
 
-/* Mobile: reorder with flexbox */
+.hero-book-desktop {
+  display: block;
+}
+
 @media (max-width: 768px) {
   .hero-content {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    text-align: center;
   }
   
-  .hero-text {
-    order: 1;
-  }
-  
-  .hero-book {
-    order: 2;
+  .hero-book-mobile {
+    display: block;
     margin: 1.5rem 0;
   }
   
-  .hero-text-continued {
-    order: 3;
+  .hero-book-desktop {
+    display: none;
+  }
+  
+  .hero-book-mobile .book-showcase img {
+    max-width: 250px;
   }
 }
+
 
 .hero-text h1 {
   color: var(--text-light);
