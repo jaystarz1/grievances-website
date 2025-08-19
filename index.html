@@ -136,16 +136,8 @@
         <nav class="nav container">
             <div class="nav-logo">An Airing of Grievances</div>
             
-            <!-- Custom Language Toggle -->
-            <div class="language-toggle-wrapper">
-                <div id="google_translate_element"></div>
-                <button class="lang-toggle-btn active notranslate" onclick="window.changeLanguage('en'); return false;">
-                    EN
-                </button>
-                <button class="lang-toggle-btn notranslate" onclick="window.changeLanguage('fr'); return false;">
-                    <span class="lang-flag">⚜️</span> FR
-                </button>
-            </div>
+            <!-- Hidden Google Translate Element -->
+            <div id="google_translate_element" style="position: absolute; visibility: hidden;"></div>
             
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
@@ -168,6 +160,11 @@
                 <li><a href="/pages/frequently-asked-questions.html" class="nav-link">FAQ</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-french">
+                    <button class="btn-french notranslate" onclick="window.changeLanguage('fr'); return false;" title="Traduire en français">
+                        <span class="french-icon">⚜️</span> FR
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>

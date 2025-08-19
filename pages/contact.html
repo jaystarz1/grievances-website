@@ -64,16 +64,7 @@
         <nav class="nav container">
             <div class="nav-logo">An Airing of Grievances</div>
             
-            <!-- Custom Language Toggle -->
-            <div class="language-toggle-wrapper">
-                <div id="google_translate_element"></div>
-                <button class="lang-toggle-btn notranslate" onclick="window.changeLanguage('en'); return false;">
-                    EN
-                </button>
-                <button class="lang-toggle-btn notranslate" onclick="window.changeLanguage('fr'); return false;">
-                    <span class="lang-flag">⚜️</span> FR
-                </button>
-            </div>
+            <div id="google_translate_element" style="position: absolute; visibility: hidden;"></div>
             
             <ul class="nav-menu">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
@@ -87,6 +78,11 @@
                         <li><a href="https://www.amazon.ca/Airing-Grievances-Unofficial-Grievance-Management-ebook/dp/B0FH7KYQ68" target="_blank" style="display: block; padding: 8px 20px; color: var(--text-primary); text-decoration: none;">📱 Ebook</a></li>
                         <li><a href="https://www.amazon.com/Airing-Grievances-Unofficial-Grievance-Management/dp/B0FHJ8KMFY" target="_blank" style="display: block; padding: 8px 20px; color: var(--text-primary); text-decoration: none;">🎧 Audiobook</a></li>
                     </ul>
+                </li>
+                <li class="nav-french">
+                    <button class="btn-french notranslate" onclick="window.changeLanguage('fr'); return false;" title="Traduire en français">
+                        <span class="french-icon">⚜️</span> FR
+                    </button>
                 </li>
             </ul>
         </nav>

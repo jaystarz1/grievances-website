@@ -970,42 +970,41 @@ a:hover {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Language Toggle Styling */
-.language-toggle-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-left: auto;
-    margin-right: 20px;
+/* French Translation Button Styling */
+.nav-french {
+    margin-left: 10px;
 }
 
-.lang-toggle-btn {
+.btn-french {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    background: var(--light-purple);
-    color: var(--primary-purple);
-    border: 2px solid var(--primary-purple);
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--primary-purple);
+    color: white;
+    border: none;
     border-radius: var(--radius-md);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(107, 76, 138, 0.2);
 }
 
-.lang-toggle-btn:hover {
-    background: var(--primary-purple);
-    color: white;
+.btn-french:hover {
+    background: var(--dark-purple);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(107, 76, 138, 0.3);
 }
 
-.lang-toggle-btn.active {
-    background: var(--primary-purple);
-    color: white;
+.btn-french:active {
+    transform: translateY(0);
 }
 
-.lang-flag {
-    font-size: 16px;
+.french-icon {
+    font-size: 18px;
+    filter: brightness(0) invert(1); /* Makes emoji white */
+    display: inline-block;
 }
 
 /* Hide Google Translate default widget while keeping it functional */

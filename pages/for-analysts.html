@@ -48,16 +48,7 @@
         <nav class="nav container">
             <div class="nav-logo">An Airing of Grievances</div>
             
-            <!-- Custom Language Toggle -->
-            <div class="language-toggle-wrapper">
-                <div id="google_translate_element"></div>
-                <button class="lang-toggle-btn notranslate" onclick="window.changeLanguage('en'); return false;">
-                    EN
-                </button>
-                <button class="lang-toggle-btn notranslate" onclick="window.changeLanguage('fr'); return false;">
-                    <span class="lang-flag">⚜️</span> FR
-                </button>
-            </div>
+            <div id="google_translate_element" style="position: absolute; visibility: hidden;"></div>
             
             <ul class="nav-menu">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
@@ -65,6 +56,11 @@
                 <li><a href="for-analysts.html" class="nav-link active">For Analysts</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
                 <li><a href="https://www.amazon.ca/Airing-Grievances-Unofficial-Grievance-Management/dp/B0FHBCLSL9" target="_blank" class="cta-button">Get the Book</a></li>
+                <li class="nav-french">
+                    <button class="btn-french notranslate" onclick="window.changeLanguage('fr'); return false;" title="Traduire en français">
+                        <span class="french-icon">⚜️</span> FR
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>

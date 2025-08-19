@@ -299,11 +299,12 @@ document.addEventListener('keydown', function(e) {
 window.changeLanguage = function(lang) {
     console.log('Initiating language change to:', lang);
     
-    // Add loading state to buttons
-    document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
-        btn.style.opacity = '0.6';
-        btn.disabled = true;
-    });
+    // Add loading state to French button
+    const frenchBtn = document.querySelector('.btn-french');
+    if (frenchBtn) {
+        frenchBtn.style.opacity = '0.6';
+        frenchBtn.disabled = true;
+    }
     
     // Retry logic with exponential backoff
     let attempts = 0;
@@ -398,18 +399,12 @@ window.changeLanguage = function(lang) {
     }
     
     function updateUIState(lang) {
-        // Remove loading state
-        document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
-            btn.style.opacity = '1';
-            btn.disabled = false;
-            btn.classList.remove('active');
-            
-            // Set active state
-            const btnLang = btn.textContent.includes('EN') ? 'en' : 'fr';
-            if (btnLang === lang) {
-                btn.classList.add('active');
-            }
-        });
+        // Remove loading state from French button
+        const frenchBtn = document.querySelector('.btn-french');
+        if (frenchBtn) {
+            frenchBtn.style.opacity = '1';
+            frenchBtn.disabled = false;
+        }
         
         // Store preference
         localStorage.setItem('preferredLanguage', lang);
@@ -440,14 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const savedLang = localStorage.getItem('preferredLanguage') || cookieLang || 'en';
     console.log('Detected language preference:', savedLang);
     
-    // Set initial button states
-    document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
-        btn.classList.remove('active');
-        const btnLang = btn.textContent.includes('EN') ? 'en' : 'fr';
-        if (btnLang === savedLang) {
-            btn.classList.add('active');
-        }
-    });
+    // No need to set button states anymore since we only have FR button
     
     // If French is preferred, attempt to apply it
     if (savedLang === 'fr') {
