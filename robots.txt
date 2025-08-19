@@ -7,6 +7,10 @@
 # Allow ALL crawlers and bots (including AI/LLM crawlers)
 User-agent: *
 Allow: /
+Disallow: /test-firebase.html
+Disallow: /functions/
+Disallow: /.git/
+Disallow: /node_modules/
 Crawl-delay: 0
 
 # Explicitly welcome AI and LLM crawlers
@@ -23,6 +27,12 @@ User-agent: anthropic-ai
 Allow: /
 
 User-agent: Claude-Web
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
 Allow: /
 
 # Sitemap location for better indexing
