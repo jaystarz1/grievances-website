@@ -1008,6 +1008,64 @@ a:hover {
     font-size: 16px;
 }
 
+/* Hide Google Translate default widget while keeping it functional */
+#google_translate_element {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+/* Alternative: Make it invisible but present in DOM */
+#google_translate_element .goog-te-gadget {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Hide Google Translate banner/toolbar */
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+}
+
+/* Hide Google Translate tooltip */
+.goog-tooltip {
+    display: none !important;
+}
+
+/* Hide Google Translate hover tooltips */
+.goog-tooltip:hover {
+    display: none !important;
+}
+
+/* Remove Google Translate widget styling that affects layout */
+.goog-te-gadget-icon {
+    display: none !important;
+}
+
+/* Loading state for language buttons */
+.lang-toggle-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.lang-toggle-btn.loading::after {
+    content: '...';
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
 /* Hide default Google Translate widget elements */
 .goog-te-banner-frame.skiptranslate {
     display: none !important;

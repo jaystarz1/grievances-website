@@ -295,38 +295,113 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Language Toggle Functionality - Make it global
+// Language Toggle Functionality - Enhanced with retry logic
 window.changeLanguage = function(lang) {
-    console.log('Changing language to:', lang);
+    console.log('Initiating language change to:', lang);
     
-    // Wait for Google Translate to be ready
-    setTimeout(function() {
-        // Try multiple selectors for Google Translate
-        var selectField = document.querySelector('.goog-te-combo');
-        if (!selectField) {
-            selectField = document.querySelector('#google_translate_element select');
-        }
+    // Add loading state to buttons
+    document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+        btn.style.opacity = '0.6';
+        btn.disabled = true;
+    });
+    
+    // Retry logic with exponential backoff
+    let attempts = 0;
+    const maxAttempts = 10;
+    
+    function attemptTranslation() {
+        attempts++;
+        console.log(`Translation attempt ${attempts}/${maxAttempts}`);
+        
+        // Method 1: Try the Google Translate select element
+        const selectField = document.querySelector('.goog-te-combo') || 
+                          document.querySelector('#google_translate_element select') ||
+                          document.querySelector('select.goog-te-combo');
         
         if (selectField) {
-            console.log('Found select field, changing to:', lang);
-            selectField.value = lang;
+            console.log('Found Google Translate select field');
             
-            // Trigger change event properly
-            var event = new Event('change', { bubbles: true });
-            selectField.dispatchEvent(event);
-            
-            // Also try the Google Translate way
-            if (typeof doGTranslate !== 'undefined') {
-                doGTranslate('en|' + lang);
+            // Set the language value
+            if (lang === 'en') {
+                // For English, we need to clear the translation
+                selectField.value = '';
+            } else {
+                selectField.value = lang;
             }
-        } else {
-            console.log('Google Translate select not found');
+            
+            // Trigger the change event multiple ways
+            selectField.dispatchEvent(new Event('change', { bubbles: true }));
+            
+            // Alternative trigger method
+            if (selectField.fireEvent) {
+                selectField.fireEvent('onchange');
+            }
+            
+            // Success - update UI
+            setTimeout(() => {
+                updateUIState(lang);
+            }, 500);
+            
+            return true;
         }
         
-        // Update active button state
+        // Method 2: Try using Google's internal functions
+        if (window.google && window.google.translate) {
+            console.log('Trying Google Translate internal API');
+            
+            // Try to find the Google Translate instance
+            const googleTranslateElement = document.getElementById('google_translate_element');
+            if (googleTranslateElement) {
+                // Try to trigger translation via cookies
+                if (lang === 'en') {
+                    // Clear translation
+                    document.cookie = 'googtrans=/en/en; path=/';
+                    location.reload();
+                } else {
+                    // Set translation
+                    document.cookie = `googtrans=/en/${lang}; path=/`;
+                    location.reload();
+                }
+                return true;
+            }
+        }
+        
+        // Method 3: Try URL hash method as fallback
+        if (attempts === maxAttempts - 1) {
+            console.log('Using URL hash fallback method');
+            if (lang === 'fr') {
+                window.location.hash = 'googtrans(fr)';
+            } else {
+                window.location.hash = '';
+            }
+            location.reload();
+            return true;
+        }
+        
+        // If we haven't succeeded, try again with backoff
+        if (attempts < maxAttempts) {
+            const delay = Math.min(100 * Math.pow(2, attempts), 3000);
+            console.log(`Google Translate not ready, retrying in ${delay}ms`);
+            setTimeout(attemptTranslation, delay);
+        } else {
+            console.error('Failed to change language after all attempts');
+            alert('Translation service is temporarily unavailable. Please try again or refresh the page.');
+            updateUIState(localStorage.getItem('preferredLanguage') || 'en');
+        }
+        
+        return false;
+    }
+    
+    function updateUIState(lang) {
+        // Remove loading state
         document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+            btn.style.opacity = '1';
+            btn.disabled = false;
             btn.classList.remove('active');
-            if (btn.textContent.includes(lang.toUpperCase())) {
+            
+            // Set active state
+            const btnLang = btn.textContent.includes('EN') ? 'en' : 'fr';
+            if (btnLang === lang) {
                 btn.classList.add('active');
             }
         });
@@ -340,37 +415,88 @@ window.changeLanguage = function(lang) {
                 'language_selected': lang
             });
         }
-    }, 100);
+        
+        console.log(`Language successfully changed to: ${lang}`);
+    }
+    
+    // Start the translation attempt
+    attemptTranslation();
 }
 
 // Load saved language preference on page load
 document.addEventListener('DOMContentLoaded', function() {
-    // Wait a bit for Google Translate to initialize
-    setTimeout(() => {
-        const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang) {
-            // Set the active button state
-            document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.includes(savedLang.toUpperCase())) {
-                    btn.classList.add('active');
-                }
-            });
+    console.log('Page loaded, checking for saved language preference');
+    
+    // Check for Google Translate cookie first
+    const googTransCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+    const cookieLang = googTransCookie ? googTransCookie.split('/').pop() : null;
+    
+    // Get saved preference
+    const savedLang = localStorage.getItem('preferredLanguage') || cookieLang || 'en';
+    console.log('Detected language preference:', savedLang);
+    
+    // Set initial button states
+    document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+        btn.classList.remove('active');
+        const btnLang = btn.textContent.includes('EN') ? 'en' : 'fr';
+        if (btnLang === savedLang) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // If French is preferred, attempt to apply it
+    if (savedLang === 'fr') {
+        console.log('French preference detected, waiting for Google Translate to initialize');
+        
+        let checkAttempts = 0;
+        const maxChecks = 20;
+        
+        function checkAndApplyLanguage() {
+            checkAttempts++;
             
-            // Apply the saved language
-            if (savedLang === 'fr') {
-                const selectField = document.querySelector('.goog-te-combo');
-                if (selectField) {
-                    selectField.value = 'fr';
-                    selectField.dispatchEvent(new Event('change'));
-                }
+            const selectField = document.querySelector('.goog-te-combo') || 
+                              document.querySelector('#google_translate_element select');
+            
+            if (selectField) {
+                console.log('Google Translate ready, applying French');
+                selectField.value = 'fr';
+                selectField.dispatchEvent(new Event('change', { bubbles: true }));
+                return;
             }
-        } else {
-            // Default to English
-            const enBtn = document.querySelector('.lang-toggle-btn:first-of-type');
-            if (enBtn) {
-                enBtn.classList.add('active');
+            
+            if (checkAttempts < maxChecks) {
+                setTimeout(checkAndApplyLanguage, 250);
+            } else {
+                console.log('Google Translate took too long to initialize, using cookie method');
+                document.cookie = 'googtrans=/en/fr; path=/';
+                // Don't reload automatically, let user trigger if needed
             }
         }
-    }, 1500); // Wait 1.5 seconds for Google Translate to fully load
+        
+        // Start checking after a short delay
+        setTimeout(checkAndApplyLanguage, 500);
+    }
+});
+
+// Also check on window load (as backup)
+window.addEventListener('load', function() {
+    // Double-check Google Translate is available
+    setTimeout(() => {
+        const selectField = document.querySelector('.goog-te-combo');
+        if (!selectField) {
+            console.warn('Google Translate widget not found after page load');
+            // Add visual indicator
+            const langWrapper = document.querySelector('.language-toggle-wrapper');
+            if (langWrapper && !langWrapper.querySelector('.translation-warning')) {
+                const warning = document.createElement('span');
+                warning.className = 'translation-warning';
+                warning.style.cssText = 'display: none;'; // Hidden by default
+                warning.textContent = '⚠️';
+                warning.title = 'Translation service loading...';
+                langWrapper.appendChild(warning);
+            }
+        } else {
+            console.log('Google Translate widget confirmed available');
+        }
+    }, 2000);
 });
