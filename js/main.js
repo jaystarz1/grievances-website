@@ -119,6 +119,59 @@ function createMobileMenu() {
 // Initialize mobile menu
 createMobileMenu();
 
+// Dropdown navigation functionality
+function initDropdowns() {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (toggle && menu) {
+            // Click handler for toggle
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Close other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.querySelector('.dropdown-menu').classList.remove('active');
+                    }
+                });
+                
+                // Toggle this dropdown
+                menu.classList.toggle('active');
+            });
+            
+            // Hover handlers for desktop
+            dropdown.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 768) {
+                    menu.classList.add('active');
+                }
+            });
+            
+            dropdown.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
+                    menu.classList.remove('active');
+                }
+            });
+        }
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+        }
+    });
+}
+
+// Initialize dropdowns on page load
+document.addEventListener('DOMContentLoaded', initDropdowns);
+
 // Add animation on scroll
 function animateOnScroll() {
     const elements = document.querySelectorAll('.card, .feature');
@@ -242,37 +295,52 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Language Toggle Functionality
-function changeLanguage(lang) {
-    // Get Google Translate dropdown
-    var selectField = document.querySelector('.goog-te-combo');
-    if (selectField) {
-        selectField.value = lang;
-        selectField.dispatchEvent(new Event('change'));
-    }
+// Language Toggle Functionality - Make it global
+window.changeLanguage = function(lang) {
+    console.log('Changing language to:', lang);
     
-    // Update active button state
-    document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    // Find the button that was clicked
-    if (event && event.target) {
-        const clickedBtn = event.target.closest('.lang-toggle-btn');
-        if (clickedBtn) {
-            clickedBtn.classList.add('active');
+    // Wait for Google Translate to be ready
+    setTimeout(function() {
+        // Try multiple selectors for Google Translate
+        var selectField = document.querySelector('.goog-te-combo');
+        if (!selectField) {
+            selectField = document.querySelector('#google_translate_element select');
         }
-    }
-    
-    // Store preference
-    localStorage.setItem('preferredLanguage', lang);
-    
-    // Track in Google Analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'language_change', {
-            'language_selected': lang
+        
+        if (selectField) {
+            console.log('Found select field, changing to:', lang);
+            selectField.value = lang;
+            
+            // Trigger change event properly
+            var event = new Event('change', { bubbles: true });
+            selectField.dispatchEvent(event);
+            
+            // Also try the Google Translate way
+            if (typeof doGTranslate !== 'undefined') {
+                doGTranslate('en|' + lang);
+            }
+        } else {
+            console.log('Google Translate select not found');
+        }
+        
+        // Update active button state
+        document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.includes(lang.toUpperCase())) {
+                btn.classList.add('active');
+            }
         });
-    }
+        
+        // Store preference
+        localStorage.setItem('preferredLanguage', lang);
+        
+        // Track in Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'language_change', {
+                'language_selected': lang
+            });
+        }
+    }, 100);
 }
 
 // Load saved language preference on page load

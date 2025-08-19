@@ -40,7 +40,7 @@
       }, 'google_translate_element');
     }
     
-    function changeLanguage(lang) {
+    function window.changeLanguage(lang); return false; {
         var selectField = document.querySelector('.goog-te-combo');
         if (selectField) {
             selectField.value = lang;
@@ -156,8 +156,8 @@
     <!-- Language Toggle -->
     <div class="lang-toggle">
         <div id="google_translate_element" style="display:none;"></div>
-        <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">🇨🇦 EN</button>
-        <button class="lang-btn" data-lang="fr" onclick="changeLanguage('fr')">🇫🇷 FR</button>
+        <button class="lang-btn" data-lang="en" onclick="window.changeLanguage('en'); return false;">🇨🇦 EN</button>
+        <button class="lang-btn" data-lang="fr" onclick="window.changeLanguage('fr'); return false;">⚜️ FR</button>
     </div>
     
     <div class="container">

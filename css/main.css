@@ -250,7 +250,8 @@ a:hover {
 }
 
 .dropdown:hover .dropdown-menu,
-.dropdown:focus-within .dropdown-menu {
+.dropdown:focus-within .dropdown-menu,
+.dropdown-menu.active {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
