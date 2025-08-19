@@ -337,6 +337,11 @@ window.changeLanguage = function(lang) {
                 selectField.fireEvent('onchange');
             }
             
+            // Handle Google Translate bar appearance
+            setTimeout(() => {
+                detectAndHandleTranslateBar();
+            }, 100);
+            
             // Success - update UI
             setTimeout(() => {
                 updateUIState(lang);
@@ -498,5 +503,69 @@ window.addEventListener('load', function() {
         } else {
             console.log('Google Translate widget confirmed available');
         }
+        
+        // Check for translate bar on load
+        detectAndHandleTranslateBar();
     }, 2000);
+});
+
+// Function to detect and handle Google Translate bar
+function detectAndHandleTranslateBar() {
+    const translateBar = document.querySelector('.goog-te-banner-frame');
+    const body = document.body;
+    
+    if (translateBar) {
+        // Google Translate bar is present
+        if (!body.classList.contains('translated')) {
+            body.classList.add('translated');
+            console.log('Google Translate bar detected - adjusting layout');
+            
+            // Get the actual height of the translate bar
+            const barHeight = translateBar.offsetHeight || 40;
+            
+            // Update CSS variable for dynamic adjustment
+            document.documentElement.style.setProperty('--translate-bar-height', `${barHeight}px`);
+            
+            // If header is fixed, adjust its position
+            const header = document.querySelector('.header');
+            if (header) {
+                const headerStyle = window.getComputedStyle(header);
+                if (headerStyle.position === 'fixed' || headerStyle.position === 'sticky') {
+                    header.style.top = `${barHeight}px`;
+                }
+            }
+        }
+    } else {
+        // No translate bar - remove adjustments
+        if (body.classList.contains('translated')) {
+            body.classList.remove('translated');
+            console.log('Google Translate bar removed - restoring layout');
+            
+            // Reset header position
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.top = '';
+            }
+            
+            // Clear CSS variable
+            document.documentElement.style.removeProperty('--translate-bar-height');
+        }
+    }
+}
+
+// Monitor for Google Translate bar changes
+const observeTranslateBar = new MutationObserver(() => {
+    detectAndHandleTranslateBar();
+});
+
+// Start observing when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Observe body for child additions (translate bar)
+    observeTranslateBar.observe(document.body, {
+        childList: true,
+        subtree: false
+    });
+    
+    // Initial check
+    setTimeout(detectAndHandleTranslateBar, 1000);
 });
