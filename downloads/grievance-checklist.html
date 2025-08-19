@@ -14,10 +14,47 @@
     </script>    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="1-MWdx-wtC_4oE2sWQYyZvsSRXyztJgS2CjV3SAnzq0" />    <title>CAF Grievance Checklist - Download</title>
     
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://grievances.thechatbotgenius.com/downloads/grievance-checklist.html">
+    
+    <!-- Multilingual SEO -->
+    <link rel="alternate" hreflang="en" href="https://grievances.thechatbotgenius.com/downloads/grievance-checklist.html" />
+    <link rel="alternate" hreflang="fr" href="https://grievances.thechatbotgenius.com/downloads/grievance-checklist.html#googtrans(fr)" />
+    <meta property="og:locale:alternate" content="fr_CA" />
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon.svg">
+    
+    <!-- Google Translate Widget -->
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,fr',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false,
+        gaTrack: true,
+        gaId: 'G-7MGBF86EHE'
+      }, 'google_translate_element');
+    }
+    
+    function changeLanguage(lang) {
+        var selectField = document.querySelector('.goog-te-combo');
+        if (selectField) {
+            selectField.value = lang;
+            selectField.dispatchEvent(new Event('change'));
+        }
+        localStorage.setItem('preferredLanguage', lang);
+        
+        // Update button states
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.style.background = btn.dataset.lang === lang ? '#3D2951' : '#6B4C8A';
+        });
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     
     <style>
         body {
@@ -85,9 +122,44 @@
             color: #6B4C8A;
             font-size: 20px;
         }
+        
+        /* Language Toggle Styles */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .lang-btn {
+            padding: 8px 15px;
+            margin: 0 3px;
+            background: #6B4C8A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .lang-btn:hover {
+            background: #5a3d73;
+        }
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
     </style>
 </head>
 <body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <div id="google_translate_element" style="display:none;"></div>
+        <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')">🇨🇦 EN</button>
+        <button class="lang-btn" data-lang="fr" onclick="changeLanguage('fr')">🇫🇷 FR</button>
+    </div>
+    
     <div class="container">
         <h1>CAF Grievance Checklist</h1>
         

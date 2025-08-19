@@ -42,6 +42,11 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://grievances.thechatbotgenius.com/">
     
+    <!-- Multilingual SEO -->
+    <link rel="alternate" hreflang="en" href="https://grievances.thechatbotgenius.com/" />
+    <link rel="alternate" hreflang="fr" href="https://grievances.thechatbotgenius.com/#googtrans(fr)" />
+    <meta property="og:locale:alternate" content="fr_CA" />
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -106,12 +111,39 @@
         }
     }
     </script>
+    
+    <!-- Google Translate Widget -->
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,fr', // Only English and French
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false,
+        gaTrack: true, // Track usage in Google Analytics
+        gaId: 'G-7MGBF86EHE'
+      }, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
     <!-- Header Navigation -->
     <header class="header">
         <nav class="nav container">
             <div class="nav-logo">An Airing of Grievances</div>
+            
+            <!-- Custom Language Toggle -->
+            <div class="language-toggle-wrapper">
+                <div id="google_translate_element" style="display:none;"></div>
+                <button class="lang-toggle-btn" onclick="changeLanguage('en')">
+                    <span class="lang-flag">🇨🇦</span> EN
+                </button>
+                <button class="lang-toggle-btn" onclick="changeLanguage('fr')">
+                    <span class="lang-flag">🇫🇷</span> FR
+                </button>
+            </div>
+            
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#process" class="nav-link">Grievance Process</a></li>

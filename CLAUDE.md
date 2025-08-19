@@ -82,6 +82,68 @@ ADMIN_EMAIL=admin@example.com
 SENDER_EMAIL=noreply@example.com
 ```
 
+## Bilingual Support (Google Translate)
+
+### Implementation
+All main pages include Google Translate widget configured for EN/FR only to serve the bilingual Canadian Armed Forces audience.
+
+### Adding to New Pages
+When creating new pages, include the following before `</head>`:
+
+```html
+<!-- Google Translate Widget -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,fr',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false,
+    gaTrack: true,
+    gaId: 'G-7MGBF86EHE'
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+```
+
+And in the header after nav-logo:
+
+```html
+<!-- Custom Language Toggle -->
+<div class="language-toggle-wrapper">
+    <div id="google_translate_element" style="display:none;"></div>
+    <button class="lang-toggle-btn" onclick="changeLanguage('en')">
+        <span class="lang-flag">🇨🇦</span> EN
+    </button>
+    <button class="lang-toggle-btn" onclick="changeLanguage('fr')">
+        <span class="lang-flag">🇫🇷</span> FR
+    </button>
+</div>
+```
+
+### Multilingual SEO
+Add these meta tags for French SEO:
+
+```html
+<!-- Multilingual SEO -->
+<link rel="alternate" hreflang="en" href="https://grievances.thechatbotgenius.com/[page-path]" />
+<link rel="alternate" hreflang="fr" href="https://grievances.thechatbotgenius.com/[page-path]#googtrans(fr)" />
+<meta property="og:locale:alternate" content="fr_CA" />
+```
+
+### Testing Translation
+1. Click FR button to translate to French
+2. Click EN to return to English
+3. Check that preference persists on page reload (stored in localStorage)
+4. Verify Google Analytics tracks language changes (event: language_change)
+
+### Notes
+- ~25% of CAF members are francophone - critical for reach
+- Google Translate provides instant translation at zero cost
+- Future upgrade path: Weglot or professional translation if >20% use French
+- Language preference is saved in localStorage for better UX
+
 ## Important Conventions
 
 ### CSS Classes

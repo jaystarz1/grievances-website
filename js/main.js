@@ -241,3 +241,68 @@ document.addEventListener('keydown', function(e) {
         closeLightbox();
     }
 });
+
+// Language Toggle Functionality
+function changeLanguage(lang) {
+    // Get Google Translate dropdown
+    var selectField = document.querySelector('.goog-te-combo');
+    if (selectField) {
+        selectField.value = lang;
+        selectField.dispatchEvent(new Event('change'));
+    }
+    
+    // Update active button state
+    document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Find the button that was clicked
+    if (event && event.target) {
+        const clickedBtn = event.target.closest('.lang-toggle-btn');
+        if (clickedBtn) {
+            clickedBtn.classList.add('active');
+        }
+    }
+    
+    // Store preference
+    localStorage.setItem('preferredLanguage', lang);
+    
+    // Track in Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'language_change', {
+            'language_selected': lang
+        });
+    }
+}
+
+// Load saved language preference on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for Google Translate to initialize
+    setTimeout(() => {
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang) {
+            // Set the active button state
+            document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(savedLang.toUpperCase())) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Apply the saved language
+            if (savedLang === 'fr') {
+                const selectField = document.querySelector('.goog-te-combo');
+                if (selectField) {
+                    selectField.value = 'fr';
+                    selectField.dispatchEvent(new Event('change'));
+                }
+            }
+        } else {
+            // Default to English
+            const enBtn = document.querySelector('.lang-toggle-btn:first-of-type');
+            if (enBtn) {
+                enBtn.classList.add('active');
+            }
+        }
+    }, 1500); // Wait 1.5 seconds for Google Translate to fully load
+});
