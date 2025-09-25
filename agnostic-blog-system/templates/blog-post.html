@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[POST_TITLE] - Your Site Name</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="[POST_EXCERPT]">
+    <meta name="author" content="[POST_AUTHOR]">
+    <meta property="article:published_time" content="[PUBLISH_DATE]">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="[POST_TITLE]">
+    <meta property="og:description" content="[POST_EXCERPT]">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="[POST_IMAGE_URL]">
+    <meta property="og:url" content="[POST_URL]">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="[POST_TITLE]">
+    <meta name="twitter:description" content="[POST_EXCERPT]">
+    <meta name="twitter:image" content="[POST_IMAGE_URL]">
+
+    <!-- Blog System CSS -->
+    <link rel="stylesheet" href="../css/blog.css">
+
+    <!-- Custom Styles for Single Post -->
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .blog-post-hero {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .blog-post-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .blog-post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .blog-post-content h2 {
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+
+        .blog-post-content h3 {
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.4rem;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .blog-post-content code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .blog-post-content pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .blog-post-content blockquote {
+            border-left: 4px solid #1a1f71;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .blog-post-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .blog-post-share {
+            margin-bottom: 2rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .share-button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .share-button:hover {
+            background: #f0f0f0;
+        }
+
+        .related-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .related-post {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .related-post:hover {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .related-post-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .related-post-excerpt {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your site header/navigation goes here -->
+    <header>
+        <nav>
+            <!-- Your navigation -->
+            <a href="/blog">← Back to Blog</a>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <!-- Post Hero Image -->
+            <div class="blog-post-hero">
+                <img src="[POST_IMAGE_URL]" alt="[POST_IMAGE_ALT]" />
+            </div>
+
+            <!-- Post Header -->
+            <header class="blog-post-header">
+                <div class="blog-post-meta">
+                    <time datetime="[PUBLISH_DATE_ISO]">[DISPLAY_DATE]</time>
+                    <span class="blog-post-author">By [POST_AUTHOR]</span>
+                    <span class="blog-post-reading-time">[READING_TIME]</span>
+                </div>
+                <h1 class="blog-post-title">[POST_TITLE]</h1>
+                <div class="blog-post-tags">
+                    <!-- Tags will be populated by JavaScript -->
+                </div>
+            </header>
+
+            <!-- Post Content -->
+            <div class="blog-post-content">
+                <!-- Your blog post content goes here -->
+                <p class="lead">[POST_EXCERPT]</p>
+
+                <h2>Introduction</h2>
+                <p>Start your blog post content here. This is where you'll write the main body of your article.</p>
+
+                <h2>Main Points</h2>
+                <p>Continue with your main arguments, insights, or tutorial steps.</p>
+
+                <blockquote>
+                    "Add meaningful quotes or important callouts in blockquotes like this."
+                </blockquote>
+
+                <h3>Subsection Example</h3>
+                <p>Break down complex topics into smaller, digestible sections.</p>
+
+                <pre><code>// Code examples can be included like this
+function example() {
+    return "Hello, Blog!";
+}</code></pre>
+
+                <h2>Conclusion</h2>
+                <p>Wrap up your post with key takeaways and final thoughts.</p>
+            </div>
+
+            <!-- Post Footer -->
+            <footer class="blog-post-footer">
+                <!-- Share Section -->
+                <div class="blog-post-share">
+                    <h3>Share this post</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-button" onclick="shareOnTwitter(); return false;">Twitter</a>
+                        <a href="#" class="share-button" onclick="shareOnLinkedIn(); return false;">LinkedIn</a>
+                        <a href="#" class="share-button" onclick="copyLink(); return false;">Copy Link</a>
+                    </div>
+                </div>
+
+                <!-- Related Posts -->
+                <div class="blog-post-related">
+                    <h3>Related Posts</h3>
+                    <div id="related-posts" class="related-posts">
+                        <!-- Related posts will be populated by JavaScript -->
+                    </div>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <!-- Your site footer goes here -->
+    <footer>
+        <!-- Your footer content -->
+    </footer>
+
+    <!-- Blog System JavaScript -->
+    <script src="../data/blog-posts.js"></script>
+    <script src="../data/tags.js"></script>
+    <script src="../js/blog-engine.js"></script>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Get current post data (you'll need to set this based on your implementation)
+        const currentPostId = 'POST_ID'; // Replace with actual post ID
+
+        // Initialize blog system
+        const blogSystem = new BlogSystem();
+
+        // Get and display related posts
+        function displayRelatedPosts() {
+            const relatedPosts = BlogPostsData.getRelated(currentPostId, 3);
+            const container = document.getElementById('related-posts');
+
+            if (relatedPosts.length === 0) {
+                container.innerHTML = '<p>No related posts found.</p>';
+                return;
+            }
+
+            container.innerHTML = relatedPosts.map(post => `
+                <div class="related-post">
+                    <div class="related-post-title">
+                        <a href="${post.url}">${post.title}</a>
+                    </div>
+                    <div class="related-post-excerpt">
+                        ${post.excerpt}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Share functions
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.querySelector('.blog-post-title').textContent);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            displayRelatedPosts();
+
+            // Display tags
+            const post = BlogPostsData.getPost(currentPostId);
+            if (post && post.tags) {
+                const tagsContainer = document.querySelector('.blog-post-tags');
+                tagsContainer.innerHTML = post.tags.map(tagId => {
+                    const tag = blogTags.helpers.getTag(tagId);
+                    return tag ? `<span class="blog-post-tag">${tag.label}</span>` : '';
+                }).join('');
+            }
+        });
+    </script>
+</body>
+</html>

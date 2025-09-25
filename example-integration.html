@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog System Integration Example</title>
+
+    <!-- Blog System CSS -->
+    <link rel="stylesheet" href="css/blog.css">
+
+    <!-- Custom overrides for your site -->
+    <style>
+        /* Override CSS variables to match your brand */
+        :root {
+            --blog-primary-color: #2c3e50;
+            --blog-primary-light: #3498db;
+            --blog-accent-color: #e67e22;
+            --blog-accent-hover: #d35400;
+        }
+
+        /* Your custom styles */
+        body {
+            font-family: 'Your Font', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .site-header {
+            background: var(--blog-primary-color);
+            color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .site-nav a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Your Site Header -->
+    <header class="site-header">
+        <div class="container">
+            <h1>Your Site Name</h1>
+            <nav>
+                <ul class="site-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1>Our Blog</h1>
+        <p>Welcome to our blog. Here you'll find our latest articles and insights.</p>
+
+        <!-- Blog System Container -->
+        <div id="blog-container"></div>
+    </main>
+
+    <!-- Your Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 Your Site Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Blog System JavaScript -->
+    <script src="data/blog-posts.js"></script>
+    <script src="data/tags.js"></script>
+    <script src="js/blog-engine.js"></script>
+    <script src="js/rss-generator.js"></script>
+    <script src="js/image-generator.js"></script>
+
+    <!-- Configuration and Initialization -->
+    <script>
+        // Configure the blog system
+        const blogConfig = {
+            siteName: "Your Site Name",
+            siteUrl: "https://yoursite.com",
+            author: {
+                name: "Your Name",
+                email: "your@email.com"
+            }
+        };
+
+        // Initialize the blog system with your preferences
+        const blogSystem = new BlogSystem({
+            container: 'blog-container',
+            postsPerPage: 6,
+            enableSearch: true,
+            enableTags: true,
+            enableRSS: true,
+            enablePagination: true,
+            dateFormat: 'MMMM DD, YYYY',
+            excerptLength: 150
+        });
+
+        // Optional: Configure image generation
+        ImageGenerator.init({
+            apiKey: '', // Add your API key here or via environment variable
+            apiType: 'OPENAI', // or 'STABILITY', 'REPLICATE'
+            defaultStyle: 'professional blog header illustration'
+        });
+
+        // Optional: Configure RSS feed
+        if (typeof RSSGenerator !== 'undefined') {
+            RSSGenerator.setConfig({
+                title: blogConfig.siteName + ' Blog',
+                link: blogConfig.siteUrl + '/blog',
+                description: 'Latest posts from ' + blogConfig.siteName,
+                managingEditor: blogConfig.author.email,
+                atomLink: blogConfig.siteUrl + '/feed.xml'
+            });
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            blogSystem.init();
+
+            // Optional: Add custom event handlers
+            document.addEventListener('blog:post:clicked', (e) => {
+                console.log('Post clicked:', e.detail);
+                // Add your analytics tracking here
+            });
+        });
+
+        // Example: Programmatically add a new post
+        function addNewPost() {
+            const newPost = {
+                title: "New Post Title",
+                excerpt: "This is a brief description of the new post.",
+                author: "Author Name",
+                tags: ["tutorial", "beginner"],
+                categories: ["Technology"],
+                content: "Full post content here...",
+                featured: false,
+                draft: false
+            };
+
+            const addedPost = blogSystem.addPost(newPost);
+            console.log('Post added:', addedPost);
+
+            // Optional: Generate image for the new post
+            if (typeof ImageGenerator !== 'undefined') {
+                ImageGenerator.generate(addedPost).then(image => {
+                    if (image) {
+                        console.log('Image generated:', image.url);
+                        // Update post with image
+                        blogSystem.updatePost(addedPost.id, { image: image });
+                    }
+                });
+            }
+        }
+
+        // Example: Search for posts
+        function searchPosts(query) {
+            const results = BlogPostsData.search(query);
+            console.log(`Found ${results.length} posts matching "${query}"`);
+            return results;
+        }
+
+        // Example: Get posts by tag
+        function getPostsByTag(tag) {
+            const posts = BlogPostsData.getByTag(tag);
+            console.log(`Found ${posts.length} posts with tag "${tag}"`);
+            return posts;
+        }
+
+        // Example: Generate RSS feed manually
+        function generateFeeds() {
+            if (typeof RSSGenerator !== 'undefined') {
+                const posts = BlogPostsData.getRSSPosts(20);
+
+                // Generate RSS 2.0
+                const rssFeed = RSSGenerator.generate(posts);
+                console.log('RSS feed generated:', rssFeed.substring(0, 200) + '...');
+
+                // Generate Atom
+                const atomFeed = RSSGenerator.generateAtom(posts);
+                console.log('Atom feed generated:', atomFeed.substring(0, 200) + '...');
+
+                // Generate JSON Feed
+                const jsonFeed = RSSGenerator.generateJSON(posts);
+                console.log('JSON feed generated:', jsonFeed.substring(0, 200) + '...');
+
+                // You can save these to your server or serve them dynamically
+            }
+        }
+    </script>
+</body>
+</html>

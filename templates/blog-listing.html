@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Your Site Name</title>
+    <meta name="description" content="Latest blog posts and articles">
+
+    <!-- Feed Discovery -->
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/atom.xml">
+    <link rel="alternate" type="application/json" title="JSON Feed" href="/feed.json">
+
+    <!-- Blog System CSS -->
+    <link rel="stylesheet" href="../css/blog.css">
+</head>
+<body>
+    <!-- Your site header/navigation goes here -->
+    <header>
+        <nav>
+            <!-- Your navigation -->
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Blog</h1>
+
+            <!-- Blog system container -->
+            <div id="blog-container"></div>
+        </div>
+    </main>
+
+    <!-- Your site footer goes here -->
+    <footer>
+        <!-- Your footer content -->
+    </footer>
+
+    <!-- Blog System JavaScript -->
+    <script src="../data/blog-posts.js"></script>
+    <script src="../data/tags.js"></script>
+    <script src="../js/blog-engine.js"></script>
+    <script src="../js/rss-generator.js"></script>
+
+    <!-- Initialize Blog System -->
+    <script>
+        // Initialize the blog system
+        const blogSystem = new BlogSystem({
+            container: 'blog-container',
+            postsPerPage: 9,
+            enableSearch: true,
+            enableTags: true,
+            enableRSS: true,
+            enablePagination: true
+        });
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            blogSystem.init();
+        });
+    </script>
+</body>
+</html>
