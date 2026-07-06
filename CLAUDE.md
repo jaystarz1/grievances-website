@@ -180,3 +180,78 @@ Add these meta tags for French SEO:
 - **MGERC Case Database**: https://www.canada.ca/en/military-grievances-external-review/services/case-summaries.html
 - **Author's Main Site**: https://thechatbotgenius.com
 - **Legal Search Tool**: https://canliisearch.thechatbotgenius.com/
+---
+
+## RALPHY (Autonomous Execution)
+
+When user says "set up ralphy", "init ralphy", or "use ralphy":
+
+```bash
+mkdir -p .ralphy && cp ~/.claude/templates/ralphy/config.yaml.template .ralphy/config.yaml
+```
+
+Then help fill in `.ralphy/config.yaml` with:
+- `project.name` - project name
+- `project.language` - detect from package.json or ask
+- `commands.test/lint/build` - check package.json scripts
+
+**Full docs:** `~/.claude/templates/ralphy/SETUP.md`
+**Global lessons:** `~/.claude/templates/ralphy/LESSONS_LEARNED.yaml`
+
+## Knowledge Base — second-brain <!-- vault-pointer:v2 -->
+
+A shared semantic knowledge graph lives at `~/projects/second-brain/`. It holds
+every imported research doc, X/LinkedIn bookmark, Google Doc, academic paper,
+and atomized concept/entity page across all projects. **Consult it before doing
+fresh research.**
+
+### How to use it from this project (in priority order)
+
+**1. MCP tools (if `second-brain` MCP is loaded — check `mcp` listing):**
+```
+mcp__second-brain__vault_query(question, k=8)   → top-K semantically relevant chunks
+mcp__second-brain__vault_read(path)             → read a wiki page
+mcp__second-brain__vault_save_decision(...)     → write a decision-memo back to the graph
+```
+
+**2. CLI via Bash (always available, zero setup):**
+```bash
+~/projects/second-brain/.venv/bin/python \
+  ~/projects/second-brain/scripts/query-vault.py "your question here" --k 8
+```
+Returns scored chunks with file paths. Drill into any with `Read`.
+
+**3. Direct file access (no semantic search, but cheapest):**
+- Start at `~/projects/second-brain/wiki/interests/index.md` — Map of Content,
+  clusters tagged `undeveloped` / `developing` / `mature`.
+- Drill: `wiki/interests/<topic>.md` → `wiki/sources/<source>.md`
+- Or `Grep -r "<keyword>" ~/projects/second-brain/wiki/`
+
+### When you generate research worth keeping
+
+Copy the final markdown into:
+```
+~/projects/second-brain/wiki/sources/research-<project>-<slug>.md
+```
+Then re-embed so it's queryable in future sessions:
+```bash
+cd ~/projects/second-brain && .venv/bin/python scripts/embed-vault.py
+```
+
+For *decisions* (not raw research): prefer `vault_save_decision(...)` via MCP —
+it writes the right frontmatter, the decision rationale, and triggers
+re-embedding automatically.
+
+### Hard rules
+
+- **Do not duplicate work the vault already has.** Always query first.
+- **Link, don't re-paste.** If you cite a vault source, use a wikilink:
+  `[[<source-stem>]]` (Obsidian-style).
+- **Do not push the vault to a public remote.** It's a private repo
+  (`github.com/jaystarz1/second-brain`, private).
+
+### Human interface (you, in a browser — not for Claude)
+
+For ad-hoc human queries with a permanent answer page in the wiki:
+<http://localhost:8081/> (form), <http://localhost:8080/> (styled wiki).
+Both are LaunchAgents and always running.
