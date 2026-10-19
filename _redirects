@@ -2,3 +2,6 @@
 /CLAUDE.md /404.html 404!
 /AGENTS.md /404.html 404!
 /package.json /404.html 404!
+/.env* /404.html 404!
+/reports/* /404.html 404!
+/logs/* /404.html 404!
